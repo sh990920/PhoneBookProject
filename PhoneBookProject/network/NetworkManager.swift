@@ -19,7 +19,6 @@ class NetworkManager {
                 completion(nil)
                 return
             }
-            // http status code 성공 범위.
             let successRange = 200..<300
              if let response = response as? HTTPURLResponse, successRange.contains(response.statusCode) {
                 guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
@@ -38,19 +37,14 @@ class NetworkManager {
     func imageSetting(url: String, imageView: UIImageView) {
         guard let imageUrl = URL(string: url) else { return }
         URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-            // 에러 처리
             if let error = error {
                 print("Failed to load image: \(error)")
                 return
             }
-            
-            // 데이터 확인
             guard let data = data, let image = UIImage(data: data) else {
                 print("Failed to load image: Data is nil")
                 return
             }
-            
-            // 메인 스레드에서 UI 업데이트
             DispatchQueue.main.async {
                 imageView.image = image
             }

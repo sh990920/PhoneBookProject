@@ -19,10 +19,7 @@ class TableView: UIView {
         }
     }
     
-    var container: NSPersistentContainer!
-    
     var viewController: UIViewController?
-
     
     init() {
         super.init(frame: .zero)
@@ -30,8 +27,6 @@ class TableView: UIView {
         tableView.dataSource = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         configureUI()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.container = appDelegate.persistentContainer
         readAllData()
     }
     
@@ -48,37 +43,9 @@ class TableView: UIView {
     
     func readAllData() {
         items.removeAll()
-        do {
-            let phoneBooks = try self.container.viewContext.fetch(PhoneBook.fetchRequest())
-
-            for phoneBook in phoneBooks {
-                items.append(phoneBook)
-            }
-            itemsSort()
-        } catch {
-            print("데이터 읽기 실패")
-        }
-    }
-    
-    func deleteData(name: String) {
-        let fetchRequest = PhoneBook.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
-        
-        do {
-            let result = try self.container.viewContext.fetch(fetchRequest)
-            
-            for data in result as [NSManagedObject] {
-                self.container.viewContext.delete(data)
-            }
-            
-            try self.container.viewContext.save()
-            
-            print("데이터 삭제 성공")
-            
-        } catch {
-            print("데이터 삭제 실패")
-        }
-        
+        items = DataManager.shared.readAllData()
+        print(items)
+        itemsSort()
     }
     
     func itemsSort() {
@@ -104,7 +71,7 @@ extension TableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let item = items[indexPath.row]
-        cell.configure(with: item) // 셀 구성 함수 호출
+        cell.configure(with: item)
         return cell
     }
     

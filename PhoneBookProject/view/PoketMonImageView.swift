@@ -11,7 +11,6 @@ class DetailView: UIView {
     
     let imageView = UIImageView()
     let button = UIButton()
-    let networkManager = NetworkManager.shared
     
     var imageURL = ""
     
@@ -60,9 +59,9 @@ class DetailView: UIView {
         let strUrl = "https://pokeapi.co/api/v2/pokemon/\(num)"
         
         guard let url = URL(string: strUrl) else { return }
-        networkManager.fetchData(url: url) { [weak self] (result: PoketMon?) in
+        NetworkManager.shared.fetchData(url: url) { [weak self] (result: PoketMon?) in
             guard let self = self, let result else { return }
-            networkManager.imageSetting(url: result.sprites.frontDefault, imageView: imageView)
+            NetworkManager.shared.imageSetting(url: result.sprites.frontDefault, imageView: imageView)
             imageURL = result.sprites.frontDefault
         }
     }

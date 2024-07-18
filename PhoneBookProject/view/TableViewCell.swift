@@ -10,8 +10,6 @@ import SnapKit
 
 class TableViewCell: UITableViewCell {
     
-    let networkManager = NetworkManager.shared
-    
     let poketMonImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -44,7 +42,7 @@ class TableViewCell: UITableViewCell {
         guard let name = item.name, let phoneNumber = item.phoneNumber, let image = item.image else { return }
         nameLabel.text = name
         phoneNumberLabel.text = phoneNumber
-        networkManager.imageSetting(url: image, imageView: poketMonImageView)
+        NetworkManager.shared.imageSetting(url: image, imageView: poketMonImageView)
     }
     
     func configureUI() {
@@ -57,15 +55,12 @@ class TableViewCell: UITableViewCell {
             make.height.equalTo(50)
             make.width.equalTo(70)
         }
-        
         let stackView = UIStackView(arrangedSubviews: [poketMonImageView, nameLabel, phoneNumberLabel])
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.spacing = 10
-        
         contentView.addSubview(stackView)
-        
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
