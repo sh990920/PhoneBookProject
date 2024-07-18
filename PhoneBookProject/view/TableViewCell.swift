@@ -10,6 +10,8 @@ import SnapKit
 
 class TableViewCell: UITableViewCell {
     
+    let networkManager = NetworkManager.shared
+    
     let poketMonImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -42,18 +44,7 @@ class TableViewCell: UITableViewCell {
         guard let name = item.name, let phoneNumber = item.phoneNumber, let image = item.image else { return }
         nameLabel.text = name
         phoneNumberLabel.text = phoneNumber
-        fetchImage(url: image)
-    }
-    
-    func fetchImage(url: String) {
-        guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.poketMonImageView.image = image
-                }
-            }
-        }.resume()
+        networkManager.imageSetting(url: image, imageView: poketMonImageView)
     }
     
     func configureUI() {

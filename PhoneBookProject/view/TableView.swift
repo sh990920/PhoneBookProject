@@ -10,7 +10,9 @@ import SnapKit
 import CoreData
 
 class TableView: UIView {
+    
     var tableView = UITableView(frame: .zero, style: .plain)
+    
     var items: [PhoneBook] = [] {
         didSet {
             tableView.reloadData()
@@ -20,6 +22,29 @@ class TableView: UIView {
     var container: NSPersistentContainer!
     
     var viewController: UIViewController?
+
+    
+    init() {
+        super.init(frame: .zero)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        configureUI()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.container = appDelegate.persistentContainer
+        readAllData()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureUI() {
+        addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
     
     func readAllData() {
         items.removeAll()
@@ -32,18 +57,6 @@ class TableView: UIView {
             itemsSort()
         } catch {
             print("데이터 읽기 실패")
-        }
-    }
-    
-    func itemsSort() {
-        for (i, _) in items.enumerated() {
-            for (j, _) in items.enumerated() {
-                if items[i].name! < items[j].name! {
-                    let a = items[i]
-                    items[i] = items[j]
-                    items[j] = a
-                }
-            }
         }
     }
     
@@ -68,26 +81,15 @@ class TableView: UIView {
         
     }
     
-    init() {
-        super.init(frame: .zero)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
-        configureUI()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.container = appDelegate.persistentContainer
-        deleteData(name: "테스터7")
-        readAllData()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureUI() {
-        addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+    func itemsSort() {
+        for (i, _) in items.enumerated() {
+            for (j, _) in items.enumerated() {
+                if items[i].name! < items[j].name! {
+                    let a = items[i]
+                    items[i] = items[j]
+                    items[j] = a
+                }
+            }
         }
     }
     
@@ -103,7 +105,6 @@ extension TableView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let item = items[indexPath.row]
         cell.configure(with: item) // 셀 구성 함수 호출
-        //cell.delegate = self
         return cell
     }
     
@@ -117,6 +118,9 @@ extension TableView: UITableViewDelegate, UITableViewDataSource {
         nextViewController.item = selectItem
         
         if let parentVC = viewController {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            parentVC.navigationItem.backBarButtonItem = backItem
             parentVC.navigationController?.pushViewController(nextViewController, animated: true)
         }
     }

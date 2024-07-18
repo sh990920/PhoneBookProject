@@ -10,12 +10,6 @@ import SnapKit
 
 class ViewController: UIViewController {
     
-//    let tableView: UITableView = {
-//        let tableView = UITableView()
-//        tableView.backgroundColor = .green
-//        return tableView
-//    }()
-//    
     lazy var addButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.title = "추가"
@@ -27,7 +21,6 @@ class ViewController: UIViewController {
     
     let tableView = TableView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -38,19 +31,12 @@ class ViewController: UIViewController {
         tableView.readAllData()
         tableView.viewController = self
     }
-    
-//    private func configureUI() {
-//        view.backgroundColor = .white
-//        
-//    }
 
     private func configureUI() {
         view.backgroundColor = .white
         self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.title = "친구 목록"
-        [
-            tableView
-        ].forEach { view.addSubview($0) }
+        view.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)

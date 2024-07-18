@@ -21,6 +21,8 @@
 		A2F041E32C450AEA00722F48 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041E22C450AEA00722F48 /* TableViewCell.swift */; };
 		A2F041E52C45161800722F48 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041E42C45161800722F48 /* TableView.swift */; };
 		A2F041E72C4685A100722F48 /* PoketMonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041E62C4685A100722F48 /* PoketMonImageView.swift */; };
+		A2F041EC2C48DE0E00722F48 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041EB2C48DE0E00722F48 /* NetworkManager.swift */; };
+		A2F041EE2C48E7B400722F48 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F041ED2C48E7B400722F48 /* TextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		A2F041E22C450AEA00722F48 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		A2F041E42C45161800722F48 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		A2F041E62C4685A100722F48 /* PoketMonImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoketMonImageView.swift; sourceTree = "<group>"; };
+		A2F041EB2C48DE0E00722F48 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A2F041ED2C48E7B400722F48 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 		A2F041BC2C40B9D300722F48 /* PhoneBookProject */ = {
 			isa = PBXGroup;
 			children = (
+				A2F041EA2C48DDF700722F48 /* network */,
 				A2F041D62C40BB3600722F48 /* controller */,
 				A2F041D52C40BB3000722F48 /* view */,
 				A2F041D42C40BB2900722F48 /* model */,
@@ -101,6 +106,7 @@
 				A2F041E22C450AEA00722F48 /* TableViewCell.swift */,
 				A2F041E42C45161800722F48 /* TableView.swift */,
 				A2F041E62C4685A100722F48 /* PoketMonImageView.swift */,
+				A2F041ED2C48E7B400722F48 /* TextView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -112,6 +118,14 @@
 				A2F041DE2C4121EF00722F48 /* PhoneBookViewController.swift */,
 			);
 			path = controller;
+			sourceTree = "<group>";
+		};
+		A2F041EA2C48DDF700722F48 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				A2F041EB2C48DE0E00722F48 /* NetworkManager.swift */,
+			);
+			path = network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,8 +204,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F041EC2C48DE0E00722F48 /* NetworkManager.swift in Sources */,
 				A2F041C22C40B9D300722F48 /* ViewController.swift in Sources */,
 				A2F041E52C45161800722F48 /* TableView.swift in Sources */,
+				A2F041EE2C48E7B400722F48 /* TextView.swift in Sources */,
 				A2F041C82C40B9D300722F48 /* PhoneBookProject.xcdatamodeld in Sources */,
 				A2F041BE2C40B9D300722F48 /* AppDelegate.swift in Sources */,
 				A2F041E32C450AEA00722F48 /* TableViewCell.swift in Sources */,
