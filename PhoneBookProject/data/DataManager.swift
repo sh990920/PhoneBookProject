@@ -65,6 +65,15 @@ class DataManager {
         }
         
     }
+    // 유저 데이터를 끌고와서 업데이트 - 중복 이름이어도 업데이트가 되도록 수정
+    func updateData(user: PhoneBook?, updateName: String, updatePhoneNumber: String, updateImage: String) {
+        if let user = user {
+            user.name = updateName
+            user.phoneNumber = updatePhoneNumber
+            user.image = updateImage
+            save()
+        }
+    }
     
     func deleteData(name: String) {
         let fetchRequest = PhoneBook.fetchRequest()

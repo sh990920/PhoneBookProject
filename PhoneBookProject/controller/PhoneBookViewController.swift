@@ -76,7 +76,7 @@ class PhoneBookViewController: UIViewController {
     }
     
     @objc func updateButtonTapped() {
-        DataManager.shared.updateData(currentName: currentName, updateName: textView.nameView.text, updatePhoneNumber: textView.phoneNumberView.text, updateImage: detailView.imageURL)
+        DataManager.shared.updateData(user: item, updateName: textView.nameView.text, updatePhoneNumber: textView.phoneNumberView.text, updateImage: detailView.imageURL)
         self.navigationController?.popViewController(animated: true)
     }
         
